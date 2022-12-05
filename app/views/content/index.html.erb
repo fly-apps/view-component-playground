@@ -1,0 +1,32 @@
+<h1>View Component frameworks</h1>
+
+<p>A comparison of Rails component frameworks</p>
+
+<h2>Phlex</h2>
+
+<%= render Views::Menu.new(title: "Main Menu") do |menu|
+  menu.item "Home", root_path
+  menu.item "About", "/about"
+  menu.item "Sign-in", "/signin"
+end %>
+
+<h2>View Component</h2>
+
+<p>View Component docs recommends rendering views with multiple slot data like this:</p>
+
+<%= render MenuComponent.new title: "Main Menu" do |menu| %>
+  <% menu.with_items([
+      { text: "Home", url: root_path },
+      { text: "About", url: "/about" },
+      { text: "Sign-in", url: "/signin" }
+    ])
+  %>
+<% end %>
+
+<p>Cleaning it up to use less hashes and have helper methods takes a bit of effort, but it is doable:</p>
+
+<%= render MenuComponent.new title: "Main Menu" do |menu|
+  menu.item "Home", root_path
+  menu.item "About", "/about"
+  menu.item "Sign-in", "/signin"
+end %>
